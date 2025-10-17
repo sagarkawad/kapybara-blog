@@ -6,13 +6,18 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:push": "drizzle-kit push:pg",
+    "drizzle:seed": "tsx --loader esbuild-register/loader -r esbuild-register ./src/seed.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.6",
+    "drizzle-seed": "^0.3.1",
     "next": "15.5.6",
+    "pg": "^8.16.3",
     "postgres": "^3.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -20,14 +25,18 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^10.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.15.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.5",
+    "esbuild-register": "^3.6.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.6",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

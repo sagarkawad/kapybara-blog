@@ -1,9 +1,22 @@
-import Image from "next/image";
+import React from "react";
+import { db } from "@/db";
+import { categories } from "@/src/schema";
+import Categories from "@/components/Categories";
 
-export default function Home() {
+const Home = async () => {
+  const response = await db.select().from(categories);
+  console.log(response);
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div>
+      Home
+      <Categories
+        categories={response.map((cat) => ({
+          ...cat,
+          createdAt: cat.createdAt.toISOString(),
+        }))}
+      />
+    </div>
   );
-}
+};
+
+export default Home;

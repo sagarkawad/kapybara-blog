@@ -16,7 +16,7 @@ interface BlogPostProps {
 }
 
 interface CategoriesProps {
-  categories: Category["name"][];
+  categories: Category[];
 }
 
 interface Category {

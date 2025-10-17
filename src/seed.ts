@@ -3,7 +3,7 @@ import { Pool } from "pg";
 import { categories } from "./schema";
 import { faker } from "@faker-js/faker";
 import * as dotenv from "dotenv";
-dotenv.config({ path: ".env" });
+dotenv.config({ path: ".env.local" });
 
 if (!("DATABASE_URL" in process.env))
   throw new Error("DATABASE_URL not found on .env.development");

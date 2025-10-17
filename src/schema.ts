@@ -8,8 +8,6 @@ import {
   primaryKey,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { seed } from "drizzle-seed";
-import { drizzle } from "drizzle-orm/node-postgres";
 
 // -----------------------------
 // Posts Table

@@ -1,10 +1,9 @@
 import React from "react";
-import { db } from "@/db";
-import { categories } from "@/src/schema";
 import Categories from "@/components/Categories";
+import { fetchCategories } from "@/lib/functions";
 
 const Home = async () => {
-  const response = await db.select().from(categories);
+  const response = await fetchCategories();
   console.log(response);
   return (
     <div>

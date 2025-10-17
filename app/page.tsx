@@ -1,13 +1,13 @@
 import React from "react";
 import Categories from "@/components/Categories";
-import Blog from "@/components/BlogPost";
+import Blog from "@/components/Blog";
 import { fetchCategories, fetchBlogs } from "@/lib/functions";
 
 const Home = async () => {
   const categories = await fetchCategories();
   const blogs = await fetchBlogs();
   console.log(categories);
-  console.log(blogs);
+  console.log(blogs[0].categories);
   return (
     <div>
       Home
@@ -17,13 +17,17 @@ const Home = async () => {
           createdAt: cat.createdAt.toISOString(),
         }))}
       />
-      <Blog
-        slug={blogs[0].slug}
-        title={blogs[0].title}
-        content={blogs[0].content}
-        author={blogs[0].author}
-        createdAt={blogs[0].createdAt.toISOString()}
-      />
+      {blogs.map((blog) => (
+        <Blog
+          key={blog.id}
+          slug={blog.slug}
+          title={blog.title}
+          content={blog.content}
+          author={blog.author}
+          createdAt={blog.createdAt.toISOString()}
+          categories={blog.categories}
+        />
+      ))}
     </div>
   );
 };

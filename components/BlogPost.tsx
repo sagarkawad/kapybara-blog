@@ -2,7 +2,6 @@ import React from "react";
 import { BlogPostProps } from "@/types/types";
 
 const BlogPost = ({
-  slug,
   title,
   content,
   categories,
@@ -16,7 +15,7 @@ const BlogPost = ({
       <p>{author}</p>
       <p>{createdAt}</p>
       {categories.map((category) => (
-        <p key={category}>{category}</p>
+        <p key={category.id}>{category.name}</p>
       ))}
     </div>
   );

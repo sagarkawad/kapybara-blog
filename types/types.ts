@@ -4,7 +4,7 @@ interface BlogProps {
   createdAt: string;
   title: string;
   content: string;
-  categories: Category[];
+  categories: BlogCategory[];
 }
 
 interface BlogPostProps {
@@ -12,7 +12,7 @@ interface BlogPostProps {
   slug: string;
   title: string;
   content: string;
-  categories: Category[];
+  categories: BlogCategory[];
   author: string;
   createdAt: string;
 }
@@ -29,6 +29,13 @@ interface Category {
   createdAt: string;
 }
 
+interface BlogCategory {
+  id: number;
+  name: string;
+  description: string | null;
+  slug: string;
+}
+
 interface CategoriesState {
   categories: Category[];
   fetchCategories: () => Promise<void>;
@@ -39,5 +46,6 @@ export type {
   BlogPostProps,
   CategoriesProps,
   Category,
+  BlogCategory,
   CategoriesState,
 };

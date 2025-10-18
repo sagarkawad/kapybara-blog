@@ -7,9 +7,24 @@ export const fetchCategories = async () => {
   return response;
 };
 
-export const fetchBlogs = async () => {
-  const postsData = await db.select().from(posts);
+export const fetchBlogs = async (categoryId: number) => {
+  // Get posts that belong to this category
+  const postsData = await db
+    .select({
+      id: posts.id,
+      author: posts.author,
+      title: posts.title,
+      content: posts.content,
+      slug: posts.slug,
+      published: posts.published,
+      createdAt: posts.createdAt,
+      updatedAt: posts.updatedAt,
+    })
+    .from(posts)
+    .innerJoin(postCategories, eq(posts.id, postCategories.postId))
+    .where(eq(postCategories.categoryId, categoryId));
 
+  // Add categories to each post
   const postsWithCategories = await Promise.all(
     postsData.map(async (post) => {
       const postCats = await db

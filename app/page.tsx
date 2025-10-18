@@ -5,9 +5,10 @@ import { fetchCategories, fetchBlogs } from "@/lib/functions";
 
 const Home = async () => {
   const categories = await fetchCategories();
-  const blogs = await fetchBlogs();
+  // For now, fetch blogs for the first category (you can implement dynamic selection later)
+  const blogs = categories.length > 0 ? await fetchBlogs(categories[0].id) : [];
   console.log(categories);
-  console.log(blogs[0].categories);
+  console.log(blogs.length > 0 ? blogs[0].categories : "No blogs found");
   return (
     <div>
       Home

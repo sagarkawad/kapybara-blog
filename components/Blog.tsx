@@ -1,14 +1,7 @@
 import React from "react";
 import { BlogProps } from "@/types/types";
 
-const Blog = ({
-  author,
-  slug,
-  createdAt,
-  title,
-  content,
-  categories,
-}: BlogProps) => {
+const Blog = ({ author, createdAt, title, content, categories }: BlogProps) => {
   return (
     <div>
       <p>{author}</p>

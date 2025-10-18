@@ -8,10 +8,11 @@ interface BlogProps {
 }
 
 interface BlogPostProps {
+  id: number;
   slug: string;
   title: string;
   content: string;
-  categories: string[];
+  categories: Category[];
   author: string;
   createdAt: string;
 }
@@ -25,6 +26,7 @@ interface Category {
   name: string;
   description: string | null;
   slug: string;
+  createdAt: string;
 }
 
 interface CategoriesState {

@@ -2,21 +2,17 @@
 
 import React from "react";
 import { Category } from "@/types/types";
-import { useState } from "react";
 
 const Categories = ({
   categories,
+  selectedCategoryId,
   onCategorySelect,
 }: {
   categories: Category[];
+  selectedCategoryId: number | null;
   onCategorySelect?: (categoryId: number) => void;
 }) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-    categories.length > 0 ? categories[0].id : null
-  );
-
   const handleCategoryClick = (categoryId: number) => {
-    setSelectedCategoryId(categoryId);
     onCategorySelect?.(categoryId);
   };
 

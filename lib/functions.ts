@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { categories, postCategories, posts } from "@/src/schema";
+import { BlogPostProps } from "@/types/types";
 import { eq } from "drizzle-orm";
 
 export const fetchCategories = async () => {
@@ -46,4 +47,14 @@ export const fetchBlogs = async (categoryId: number) => {
   );
 
   return postsWithCategories;
+};
+
+//delete Blogs
+export const deleteBlog = async (blogId: number) => {
+  await db.delete(posts).where(eq(posts.id, blogId));
+};
+
+//update Blogs
+export const updateBlog = async (blogId: number, blog: BlogPostProps) => {
+  await db.update(posts).set(content).where(eq(posts.id, blogId));
 };

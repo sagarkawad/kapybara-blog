@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Kapybara Blog",
   description: "A modern blog platform with rich text editing",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({

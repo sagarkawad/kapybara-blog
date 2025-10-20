@@ -10,6 +10,7 @@ import {
   fetchAllBlogs,
   fetchBlogs,
   fetchBlogById,
+  fetchBlogBySlug,
   updateBlogWithCategories,
   deleteBlog,
 } from "../functions";
@@ -33,6 +34,13 @@ export const blogRouter = router({
     .input(z.object({ id: z.number() }))
     .query(async ({ input }) => {
       return await fetchBlogById(input.id);
+    }),
+
+  // Get blog by slug
+  getBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      return await fetchBlogBySlug(input.slug);
     }),
 
   // Create new blog

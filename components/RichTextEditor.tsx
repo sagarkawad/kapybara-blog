@@ -33,7 +33,7 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[200px] p-4",
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto focus:outline-none min-h-[150px] sm:min-h-[200px] p-3 sm:p-4",
       },
     },
   });
@@ -56,7 +56,7 @@ export function RichTextEditor({
     <button
       type="button"
       onClick={onClick}
-      className={`p-2 rounded-md transition-colors ${
+      className={`p-1.5 sm:p-2 rounded-md transition-colors ${
         isActive
           ? "bg-blue-100 text-blue-700"
           : "hover:bg-gray-100 text-gray-700"
@@ -70,7 +70,7 @@ export function RichTextEditor({
   return (
     <div className="border border-gray-300 rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="flex items-center gap-1 p-2 border-b border-gray-200 bg-gray-50">
+      <div className="flex items-center gap-0.5 sm:gap-1 p-1.5 sm:p-2 border-b border-gray-200 bg-gray-50 overflow-x-auto">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}
@@ -87,7 +87,7 @@ export function RichTextEditor({
           <Italic size={16} />
         </ToolbarButton>
 
-        <div className="w-px h-6 bg-gray-300 mx-2" />
+        <div className="w-px h-4 sm:h-6 bg-gray-300 mx-1 sm:mx-2" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -113,7 +113,7 @@ export function RichTextEditor({
           <Quote size={16} />
         </ToolbarButton>
 
-        <div className="w-px h-6 bg-gray-300 mx-2" />
+        <div className="w-px h-4 sm:h-6 bg-gray-300 mx-1 sm:mx-2" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
@@ -133,7 +133,7 @@ export function RichTextEditor({
       {/* Editor */}
       <EditorContent
         editor={editor}
-        className="min-h-[200px] max-h-[400px] overflow-y-auto"
+        className="min-h-[150px] sm:min-h-[200px] max-h-[300px] sm:max-h-[400px] overflow-y-auto"
       />
     </div>
   );

@@ -2,7 +2,12 @@ import { db } from "@/db";
 import { categories, postCategories, posts } from "@/src/schema";
 import { BlogPostProps } from "@/types/types";
 import { eq } from "drizzle-orm";
-import { CreateBlogInput, UpdateBlogInput } from "./schemas";
+import {
+  CreateBlogInput,
+  UpdateBlogInput,
+  CreateCategoryInput,
+  UpdateCategoryInput,
+} from "./schemas";
 
 export const fetchCategories = async () => {
   const response = await db.select().from(categories);
@@ -172,6 +177,41 @@ export const fetchBlogById = async (blogId: number) => {
   };
 };
 
+// Get a single blog by slug
+export const fetchBlogBySlug = async (slug: string) => {
+  const [post] = await db
+    .select({
+      id: posts.id,
+      author: posts.author,
+      title: posts.title,
+      content: posts.content,
+      slug: posts.slug,
+      published: posts.published,
+      createdAt: posts.createdAt,
+      updatedAt: posts.updatedAt,
+    })
+    .from(posts)
+    .where(eq(posts.slug, slug));
+
+  if (!post) return null;
+
+  const postCats = await db
+    .select({
+      id: categories.id,
+      name: categories.name,
+      description: categories.description,
+      slug: categories.slug,
+    })
+    .from(postCategories)
+    .innerJoin(categories, eq(postCategories.categoryId, categories.id))
+    .where(eq(postCategories.postId, post.id));
+
+  return {
+    ...post,
+    categories: postCats,
+  };
+};
+
 // Update blog with categories
 export const updateBlogWithCategories = async (
   blogId: number,
@@ -215,4 +255,71 @@ export const updateBlogWithCategories = async (
   }
 
   return await fetchBlogById(blogId);
+};
+
+// Category CRUD operations
+
+// Create a new category
+export const createCategory = async (categoryData: CreateCategoryInput) => {
+  const [newCategory] = await db
+    .insert(categories)
+    .values({
+      name: categoryData.name,
+      description: categoryData.description,
+      slug: categoryData.slug,
+    })
+    .returning();
+
+  return newCategory;
+};
+
+// Update a category
+export const updateCategory = async (
+  categoryId: number,
+  categoryData: UpdateCategoryInput
+) => {
+  const [updatedCategory] = await db
+    .update(categories)
+    .set({
+      ...(categoryData.name && { name: categoryData.name }),
+      ...(categoryData.description !== undefined && {
+        description: categoryData.description,
+      }),
+      ...(categoryData.slug && { slug: categoryData.slug }),
+    })
+    .where(eq(categories.id, categoryId))
+    .returning();
+
+  return updatedCategory;
+};
+
+// Delete a category
+export const deleteCategory = async (categoryId: number) => {
+  // First, remove all post-category relationships
+  await db
+    .delete(postCategories)
+    .where(eq(postCategories.categoryId, categoryId));
+
+  // Then delete the category
+  await db.delete(categories).where(eq(categories.id, categoryId));
+};
+
+// Get a single category by ID
+export const fetchCategoryById = async (categoryId: number) => {
+  const [category] = await db
+    .select()
+    .from(categories)
+    .where(eq(categories.id, categoryId));
+
+  return category || null;
+};
+
+// Get a single category by slug
+export const fetchCategoryBySlug = async (slug: string) => {
+  const [category] = await db
+    .select()
+    .from(categories)
+    .where(eq(categories.slug, slug));
+
+  return category || null;
 };

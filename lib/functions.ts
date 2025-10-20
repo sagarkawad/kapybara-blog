@@ -215,7 +215,7 @@ export const fetchBlogBySlug = async (slug: string) => {
 // Update blog with categories
 export const updateBlogWithCategories = async (
   blogId: number,
-  blogData: UpdateBlogInput
+  blogData: Omit<UpdateBlogInput, "id">
 ) => {
   // Update the blog post
   if (
@@ -276,7 +276,7 @@ export const createCategory = async (categoryData: CreateCategoryInput) => {
 // Update a category
 export const updateCategory = async (
   categoryId: number,
-  categoryData: UpdateCategoryInput
+  categoryData: Omit<UpdateCategoryInput, "id">
 ) => {
   const [updatedCategory] = await db
     .update(categories)

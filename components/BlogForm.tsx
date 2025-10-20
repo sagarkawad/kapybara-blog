@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { RichTextEditor } from "./RichTextEditor";
 import { trpc } from "@/lib/trpc-client";
-import { CreateBlogInput, UpdateBlogInput } from "@/lib/schemas";
-import { Category, BlogCategory } from "@/types/types";
+import { CreateBlogInput } from "@/lib/schemas";
+import { BlogCategory } from "@/types/types";
 
 interface BlogFormProps {
   initialData?: {

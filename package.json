@@ -1,7 +1,14 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "kapybara-blog",
+  "version": "1.0.0",
+  "description": "A modern, full-stack blog application built with Next.js 15, tRPC, Drizzle ORM, and PostgreSQL",
   "private": true,
+  "author": "Your Name",
+  "keywords": ["nextjs", "trpc", "drizzle", "postgresql", "blog", "typescript"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/kapybara-blog.git"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
